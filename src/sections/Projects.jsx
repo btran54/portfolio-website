@@ -33,7 +33,7 @@ function Projects() {
     {
       title: "Blue Road",
       description: "Fleet optimization web application for Azur Lane mobile game. Serves 20-50 active users with sub-500ms API response times. Built with MERN stack featuring React-based fleet builder with drag-and-drop functionality.",
-      tech: ["React", "MongoDB", "Express", "Node.js", "Render", "GitHub Pages"],
+      tech: ["Javascript", "Tailwind CSS", "HTML5", "React", "MongoDB", "Express", "Node.js", "Render", "GitHub Pages"],
       liveLink: "https://btran54.github.io/BREhp/",
       githubLink: "https://github.com/btran54/BREhp",
       highlights: ["20-50 active users", "Sub-500ms API", "Real user feedback integration"],
@@ -43,7 +43,7 @@ function Projects() {
     {
       title: "Leung Noodle Restaurant Website",
       description: "Modern restaurant website featuring a Square ordering system integration. Responsive design with custom navigation and mobile optimization deployed on Vercel with custom domain configuration.",
-      tech: ["React", "Vercel", "CSS", "Responsive Design"],
+      tech: ["Javascript", "Tailwind CSS", "React", "Vercel", "Square API", "Google Maps API"],
       liveLink: "https://leungnoodle.com",
       githubLink: "https://github.com/btran54/restaurant-website",
       highlights: ["Custom domain setup", "Mobile-responsive", "Vintage aesthetic"],
@@ -53,7 +53,7 @@ function Projects() {
     {
       title: "Project Management Tool",
       description: "A web-based project management tool designed to help teams collaborate effectively. Features include task assignments, progress tracking, and real-time notifications.",
-      tech: ["Vue.js", "Firebase", "Tailwind CSS", "MongoDB", "Express", "Node.js", "React"],
+      tech: ["Javascript"," Python", "CSS3", "HTML5", "Vue.js", "Firebase", "MongoDB", "Express", "Node.js", "React"],
       githubLink: "https://github.com/btran54/Project-Manager",
       highlights: ["Task assignments", "Progress tracking", "Real-time notifications", "User authentication"],
       gif: projectManagerGif,
@@ -67,7 +67,7 @@ function Projects() {
     setNextIndex(next)
     setIsAnimating(true)
     setSlideDirection('next')
-    setIsMediaLoading(true) // Reset loading state
+    setIsMediaLoading(true)
     
     setTimeout(() => {
       setCurrentIndex(next)
@@ -83,7 +83,7 @@ function Projects() {
     setNextIndex(prev)
     setIsAnimating(true)
     setSlideDirection('prev')
-    setIsMediaLoading(true) // Reset loading state
+    setIsMediaLoading(true)
     
     setTimeout(() => {
       setCurrentIndex(prev)
@@ -98,7 +98,7 @@ function Projects() {
       setNextIndex(index)
       setIsAnimating(true)
       setSlideDirection(index > currentIndex ? 'next' : 'prev')
-      setIsMediaLoading(true) // Reset loading state
+      setIsMediaLoading(true)
       
       setTimeout(() => {
         setCurrentIndex(index)
