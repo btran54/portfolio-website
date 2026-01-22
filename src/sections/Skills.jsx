@@ -25,11 +25,6 @@ function Skills() {
   const [parallaxRef, parallaxOffset] = useParallaxElement(0.15)
 
   const skills = {
-    "Spoken Languages": [
-      { name: "English" },
-      { name: "Cantonese" },
-      { name: "Vietnamese" },
-    ],
     "Frontend": [
       { name: "React", icon: <SiReact className="text-cyan-400" /> },
       { name: "TailwindCSS", icon: <SiTailwindcss className="text-cyan-500" /> },
@@ -50,7 +45,12 @@ function Skills() {
       { name: "Git Version Control", icon: <SiGit className="text-orange-600" /> },
       { name: "CI/CD", icon: <FaCode className="text-purple-400" /> },
       { name: "Linux Ubuntu", icon: <SiLinux className="text-gray-800 dark:text-gray-200" /> },
-    ]
+    ],
+    "Spoken Languages": [
+      { name: "English" },
+      { name: "Chinese (Cantonese)" },
+      { name: "Vietnamese" }
+    ],
   }
 
   // Featured icons for the rotating carousel
@@ -102,9 +102,11 @@ function Skills() {
                 {items.map((skill, i) => (
                   <span 
                     key={i}
-                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition flex items-center gap-2"
+                    className={`px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition ${
+                      skill.icon ? 'flex items-center gap-2' : 'flex items-center justify-center'
+                    }`}
                   >
-                    <span className="text-xl">{skill.icon}</span>
+                    {skill.icon && <span className="text-xl">{skill.icon}</span>}
                     {skill.name}
                   </span>
                 ))}
