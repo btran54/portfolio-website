@@ -10,39 +10,37 @@ import {
   SiExpress, 
   SiMongodb,
   SiGit, 
-  SiGithub, 
-  SiVercel
+  SiLinux 
 } from 'react-icons/si'
 import { FaCode } from 'react-icons/fa'
 
 function Skills() {
   const skills = {
-    "Languages": [
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-      { name: "Java", icon: <FaCode className="text-red-500" /> },
-      { name: "Python", icon: <SiPython className="text-blue-400" /> },
-      { name: "C/C++", icon: <FaCode className="text-blue-600" /> },
-      { name: "HTML5", icon: <SiHtml5 className="text-orange-500" /> },
-      { name: "CSS3", icon: <SiCss3 className="text-blue-500" /> },
-      { name: "SQL", icon: <SiMysql className="text-blue-500" /> }
+    "Spoken Languages": [
+      { name: "English" },
+      { name: "Cantonese" },
+      { name: "Vietnamese" },
     ],
     "Frontend": [
       { name: "React", icon: <SiReact className="text-cyan-400" /> },
       { name: "TailwindCSS", icon: <SiTailwindcss className="text-cyan-500" /> },
-      { name: "Responsive Design", icon: <SiCss3 className="text-blue-500" /> }
+      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
+      { name: "HTML5", icon: <SiHtml5 className="text-orange-500" /> },
+      { name: "CSS3", icon: <SiCss3 className="text-blue-500" /> }
     ],
     "Backend": [
       { name: "Node.js", icon: <SiNodedotjs className="text-green-500" /> },
-      { name: "Express", icon: <SiExpress className="text-gray-400" /> },
+      { name: "Express.js", icon: <SiExpress className="text-gray-400" /> },
       { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
-      { name: "REST APIs", icon: <SiNodedotjs className="text-green-400" /> }
+      { name: "REST APIs", icon: <FaCode className="text-green-400" /> },
+      { name: "SQL", icon: <SiMysql className="text-blue-500" /> },
+      { name: "Python", icon: <SiPython className="text-blue-400" /> },
+      { name: "Java", icon: <FaCode className="text-red-500" /> }
     ],
     "Tools & Others": [
-      { name: "Git", icon: <SiGit className="text-orange-600" /> },
-      { name: "GitHub", icon: <SiGithub className="text-gray-900 dark:text-white" /> },
-      { name: "Vercel", icon: <SiVercel className="text-gray-900 dark:text-white" /> },
-      { name: "Render", icon: <FaCode className="text-purple-400" /> },
-      { name: "Agile/Scrum", icon: <FaCode className="text-gray-400" /> }
+      { name: "Git Version Control", icon: <SiGit className="text-orange-600" /> },
+      { name: "CI/CD", icon: <FaCode className="text-purple-400" /> },
+      { name: "Linux Ubuntu", icon: <SiLinux className="text-gray-800 dark:text-gray-200" /> },
     ]
   }
 

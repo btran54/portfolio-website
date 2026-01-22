@@ -8,7 +8,7 @@ import Contact from './sections/Contact'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
     if (darkMode) {
