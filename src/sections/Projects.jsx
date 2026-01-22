@@ -18,12 +18,12 @@ function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [nextIndex, setNextIndex] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [slideDirection, setSlideDirection] = useState('') // 'next' or 'prev'
+  const [slideDirection, setSlideDirection] = useState('')
   const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
   const [carouselRef, carouselVisible] = useScrollAnimation({ threshold: 0.2, once: true })
   
   // Detect if user is on mobile
-  const isMobile = useIsMobile(768) // 768px breakpoint
+  const isMobile = useIsMobile(768)
   
   // Parallax effect for the entire section
   const [parallaxRef, parallaxOffset] = useParallaxElement(0.15)
@@ -41,7 +41,7 @@ function Projects() {
     },
     {
       title: "Leung Noodle Restaurant Website",
-      description: "Modern restaurant website featuring vintage patina aesthetic. Responsive design with custom navigation and mobile optimization deployed on Vercel with custom domain configuration.",
+      description: "Modern restaurant website featuring a Square ordering system integration. Responsive design with custom navigation and mobile optimization deployed on Vercel with custom domain configuration.",
       tech: ["React", "Vercel", "CSS", "Responsive Design"],
       liveLink: "https://leungnoodle.com",
       githubLink: "https://github.com/btran54/restaurant-website",
