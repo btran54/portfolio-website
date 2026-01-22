@@ -19,6 +19,7 @@ function Projects() {
   const [nextIndex, setNextIndex] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
   const [slideDirection, setSlideDirection] = useState('') // 'next' or 'prev'
+  const [isMediaLoading, setIsMediaLoading] = useState(true)
   const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
   const [carouselRef, carouselVisible] = useScrollAnimation({ threshold: 0.2, once: true })
   
@@ -66,6 +67,7 @@ function Projects() {
     setNextIndex(next)
     setIsAnimating(true)
     setSlideDirection('next')
+    setIsMediaLoading(true) // Reset loading state
     
     setTimeout(() => {
       setCurrentIndex(next)
@@ -81,6 +83,7 @@ function Projects() {
     setNextIndex(prev)
     setIsAnimating(true)
     setSlideDirection('prev')
+    setIsMediaLoading(true) // Reset loading state
     
     setTimeout(() => {
       setCurrentIndex(prev)
@@ -95,6 +98,7 @@ function Projects() {
       setNextIndex(index)
       setIsAnimating(true)
       setSlideDirection(index > currentIndex ? 'next' : 'prev')
+      setIsMediaLoading(true) // Reset loading state
       
       setTimeout(() => {
         setCurrentIndex(index)
@@ -108,26 +112,42 @@ function Projects() {
   const renderProjectCard = (project) => (
     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
       {/* Project Media - GIF on mobile, Video on desktop */}
-      {isMobile ? (
-        <img 
-          src={project.gif} 
-          alt={`${project.title} demo`}
-          className="w-full object-contain bg-gray-200 dark:bg-gray-900"
-          loading="lazy"
-        />
-      ) : (
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          className="w-full object-contain bg-gray-200 dark:bg-gray-900"
-          key={project.title}
-        >
-          <source src={project.video} type="video/mp4" />
-          <img src={project.gif} alt={`${project.title} demo`} />
-        </video>
-      )}
+      <div className="relative bg-gray-200 dark:bg-gray-900">
+        {/* Loading Spinner */}
+        {isMediaLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 dark:bg-gray-900">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-t-4 border-blue-500 mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Loading project demo...</p>
+            </div>
+          </div>
+        )}
+
+        {isMobile ? (
+          <img 
+            src={project.gif} 
+            alt={`${project.title} demo`}
+            className={`w-full object-contain transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
+            loading="lazy"
+            onLoad={() => setIsMediaLoading(false)}
+            onError={() => setIsMediaLoading(false)}
+          />
+        ) : (
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className={`w-full object-contain transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
+            key={project.title}
+            onLoadedData={() => setIsMediaLoading(false)}
+            onError={() => setIsMediaLoading(false)}
+          >
+            <source src={project.video} type="video/mp4" />
+            <img src={project.gif} alt={`${project.title} demo`} />
+          </video>
+        )}
+      </div>
       
       {/* Content */}
       <div className="p-8">
@@ -341,6 +361,12 @@ function Projects() {
 
         .animate-slide-in-right {
           animation: slide-in-right 0.7s ease-in-out forwards;
+        }
+
+        /* Ensure minimum height for loading state */
+        .relative.bg-gray-200,
+        .relative.bg-gray-900 {
+          min-height: 400px;
         }
       `}</style>
     </section>
