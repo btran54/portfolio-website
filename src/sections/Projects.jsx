@@ -2,17 +2,28 @@ import { useState } from 'react'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useParallaxElement } from '../hooks/useParallax'
-import blueRoadDemo from '../assets/blue-road-demo.mp4'
-import leungNoodleDemo from '../assets/leung-noodle-demo.mp4'
-import projectManagerDemo from '../assets/project-manager-demo.mp4'
+import { useIsMobile } from '../hooks/useIsMobile'
+
+// Import GIF versions
+import blueRoadGif from '../assets/blue-road-demo.gif'
+import leungNoodleGif from '../assets/leung-noodle-demo.gif'
+import projectManagerGif from '../assets/project-manager-demo.gif'
+
+// Import video versions
+import blueRoadVideo from '../assets/blue-road-demo.mp4'
+import leungNoodleVideo from '../assets/leung-noodle-demo.mp4'
+import projectManagerVideo from '../assets/project-manager-demo.mp4'
 
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [nextIndex, setNextIndex] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [slideDirection, setSlideDirection] = useState('')
+  const [slideDirection, setSlideDirection] = useState('') // 'next' or 'prev'
   const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
   const [carouselRef, carouselVisible] = useScrollAnimation({ threshold: 0.2, once: true })
+  
+  // Detect if user is on mobile
+  const isMobile = useIsMobile(768) // 768px breakpoint
   
   // Parallax effect for the entire section
   const [parallaxRef, parallaxOffset] = useParallaxElement(0.15)
@@ -25,7 +36,8 @@ function Projects() {
       liveLink: "https://btran54.github.io/BREhp/",
       githubLink: "https://github.com/btran54/BREhp",
       highlights: ["20-50 active users", "Sub-500ms API", "Real user feedback integration"],
-      image: blueRoadDemo
+      gif: blueRoadGif,
+      video: blueRoadVideo
     },
     {
       title: "Leung Noodle Restaurant Website",
@@ -34,15 +46,17 @@ function Projects() {
       liveLink: "https://leungnoodle.com",
       githubLink: "https://github.com/btran54/restaurant-website",
       highlights: ["Custom domain setup", "Mobile-responsive", "Vintage aesthetic"],
-      image: leungNoodleDemo
+      gif: leungNoodleGif,
+      video: leungNoodleVideo
     },
     {
       title: "Project Management Tool",
       description: "A web-based project management tool designed to help teams collaborate effectively. Features include task assignments, progress tracking, and real-time notifications.",
       tech: ["Vue.js", "Firebase", "Tailwind CSS", "MongoDB", "Express", "Node.js", "React"],
-      githubLink: "https://github.com/btran54/Project-Manager",
+      githubLink: "https://github.com/btran54/project-management-tool",
       highlights: ["Task assignments", "Progress tracking", "Real-time notifications", "User authentication"],
-      image: projectManagerDemo
+      gif: projectManagerGif,
+      video: projectManagerVideo
     }
   ]
 
@@ -93,15 +107,27 @@ function Projects() {
 
   const renderProjectCard = (project) => (
     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-      {/* Project GIF */}
-      <video 
-        src={project.image} 
-        alt={`${project.title} demo`}
-        className="w-full object-contain bg-gray-200 dark:bg-gray-900"
-        autoPlay
-        loop
-        muted
-      />
+      {/* Project Media - GIF on mobile, Video on desktop */}
+      {isMobile ? (
+        <img 
+          src={project.gif} 
+          alt={`${project.title} demo`}
+          className="w-full object-contain bg-gray-200 dark:bg-gray-900"
+          loading="lazy"
+        />
+      ) : (
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full object-contain bg-gray-200 dark:bg-gray-900"
+          key={project.title}
+        >
+          <source src={project.video} type="video/mp4" />
+          <img src={project.gif} alt={`${project.title} demo`} />
+        </video>
+      )}
       
       {/* Content */}
       <div className="p-8">
