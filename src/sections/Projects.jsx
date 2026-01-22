@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useParallaxElement } from '../hooks/useParallax'
-import blueRoadDemo from '../assets/blue-road-demo.gif'
-import leungNoodleDemo from '../assets/leung-noodle-demo.gif'
-import projectManagerDemo from '../assets/project-manager-demo.gif'
+import blueRoadDemo from '../assets/blue-road-demo.mp4'
+import leungNoodleDemo from '../assets/leung-noodle-demo.mp4'
+import projectManagerDemo from '../assets/project-manager-demo.mp4'
 
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -94,10 +94,13 @@ function Projects() {
   const renderProjectCard = (project) => (
     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
       {/* Project GIF */}
-      <img 
+      <video 
         src={project.image} 
         alt={`${project.title} demo`}
         className="w-full object-contain bg-gray-200 dark:bg-gray-900"
+        autoPlay
+        loop
+        muted
       />
       
       {/* Content */}
