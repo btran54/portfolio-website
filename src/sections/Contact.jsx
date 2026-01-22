@@ -62,14 +62,16 @@ function Contact() {
 
           {/* Social Links */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="mailto:briantran888@gmail.com"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition font-medium flex items-center justify-center gap-2"
+            <a
+              href="https://www.linkedin.com/in/brian-tran-42bb18207/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium flex items-center justify-center gap-2"
             >
-              <HiMail className="text-xl" />
-              Email Directly
+              <SiLinkedin className="text-xl" />
+              LinkedIn
             </a>
-            <a 
+            <a
               href="https://github.com/btran54"
               target="_blank"
               rel="noopener noreferrer"
@@ -78,14 +80,12 @@ function Contact() {
               <SiGithub className="text-xl" />
               GitHub
             </a>
-            <a 
-              href="https://www.linkedin.com/in/brian-tran-42bb18207/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium flex items-center justify-center gap-2"
+            <a
+              href="mailto:briantran888@gmail.com"
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition font-medium flex items-center justify-center gap-2"
             >
-              <SiLinkedin className="text-xl" />
-              LinkedIn
+              <HiMail className="text-xl" />
+              Email Directly
             </a>
           </div>
         </div>
