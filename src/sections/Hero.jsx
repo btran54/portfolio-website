@@ -26,7 +26,7 @@ function Hero() {
           </h2>
           
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-delay-2">
-            Recent UC Santa Cruz CS grad building scalable full-stack applications. 
+            Recent UC Santa Cruz Computer Science graduate building scalable full-stack applications. 
             Passionate about learning new technologies and solving challenging problems 
             using modern development practices.
           </p>
