@@ -13,8 +13,17 @@ import {
   SiLinux 
 } from 'react-icons/si'
 import { FaCode } from 'react-icons/fa'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import { useParallaxElement } from '../hooks/useParallax'
 
 function Skills() {
+  const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
+  const [gridRef, gridVisible] = useScrollAnimation({ threshold: 0.2, once: true })
+  const [carouselRef, carouselVisible] = useScrollAnimation({ threshold: 0.2, once: true })
+  
+  // Parallax effect
+  const [parallaxRef, parallaxOffset] = useParallaxElement(0.15)
+
   const skills = {
     "Spoken Languages": [
       { name: "English" },
@@ -58,11 +67,34 @@ function Skills() {
   ]
 
   return (
-    <section id="skills" className="py-20 px-4 bg-gray-100 dark:bg-gray-800/50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Skills & Technologies</h2>
+    <section id="skills" className="py-20 px-4 bg-gray-100 dark:bg-gray-800/50 relative overflow-hidden">
+      {/* Decorative parallax background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+        <div 
+          className="absolute -top-20 left-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl"
+          style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-0 right-1/4 w-80 h-80 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-full blur-3xl"
+          style={{ transform: `translateY(${parallaxOffset * 0.3}px)` }}
+        ></div>
+      </div>
+      
+      <div 
+        ref={parallaxRef}
+        className="max-w-6xl mx-auto relative z-10"
+      >
+        <h2 
+          ref={titleRef}
+          className={`text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-on-scroll fade-up ${titleVisible ? 'visible' : ''}`}
+        >
+          Skills & Technologies
+        </h2>
         
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div 
+          ref={gridRef}
+          className={`grid md:grid-cols-2 gap-8 mb-12 stagger-children ${gridVisible ? 'visible' : ''}`}
+        >
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
               <h3 className="text-xl font-bold mb-4 text-blue-500 dark:text-blue-400">{category}</h3>
@@ -82,7 +114,10 @@ function Skills() {
         </div>
 
         {/* Rotating Icon Carousel */}
-        <div className="flex justify-center overflow-hidden">
+        <div 
+          ref={carouselRef}
+          className={`flex justify-center overflow-hidden animate-on-scroll fade-in ${carouselVisible ? 'visible' : ''}`}
+        >
           <div className="relative w-[600px] h-[400px]">
             <style>{`
               @keyframes rotate {

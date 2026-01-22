@@ -1,19 +1,49 @@
 import { useState } from 'react'
 import { SiLinkedin, SiGithub } from 'react-icons/si'
 import { HiMail, HiDownload, HiEye } from 'react-icons/hi'
+import { useTypingEffect } from '../hooks/useTypingEffect'
+import { useParallax } from '../hooks/useParallax'
 import ResumeModal from '../components/ResumeModal'
 
 function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  
+  // Parallax effects for background elements - different speeds for depth
+  const [parallax1Ref, parallax1Offset] = useParallax(0.3)
+  const [parallax2Ref, parallax2Offset] = useParallax(0.5)
+  const [parallax3Ref, parallax3Offset] = useParallax(0.2)
+  
+  // Typing animation for different roles
+  const roles = [
+    "Full-Stack Software Engineer",
+    "React Developer",
+    "Please hire me :)",
+    "Problem Solver",
+    "Tech Enthusiast"
+  ]
+  
+  const typedText = useTypingEffect(roles, 100, 50, 2000)
 
   return (
     <>
       <section id="hero" className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-        {/* Animated background elements */}
+        {/* Animated background elements with parallax */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl animate-float-delayed"></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-full blur-3xl animate-float-slow"></div>
+          <div 
+            ref={parallax1Ref}
+            className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-3xl animate-float"
+            style={{ transform: `translateY(${parallax1Offset}px)` }}
+          ></div>
+          <div 
+            ref={parallax2Ref}
+            className="absolute top-40 right-20 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl animate-float-delayed"
+            style={{ transform: `translateY(${parallax2Offset}px)` }}
+          ></div>
+          <div 
+            ref={parallax3Ref}
+            className="absolute bottom-20 left-1/3 w-80 h-80 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-full blur-3xl animate-float-slow"
+            style={{ transform: `translateY(${parallax3Offset}px)` }}
+          ></div>
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -21,8 +51,9 @@ function Hero() {
             Brian Tran
           </h1>
           
-          <h2 className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4 animate-fade-in-delay-1">
-            Full-Stack Software Engineer
+          <h2 className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4 animate-fade-in-delay-1 h-12 flex items-center justify-center">
+            <span>{typedText}</span>
+            <span className="inline-block w-0.5 h-8 bg-blue-500 ml-1 animate-blink"></span>
           </h2>
           
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-delay-2">
@@ -98,6 +129,11 @@ function Hero() {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
           }
+
+          @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+          }
           
           .animate-float {
             animation: float 6s ease-in-out infinite;
@@ -129,6 +165,10 @@ function Hero() {
 
           .animate-fade-in-delay-4 {
             animation: fade-in 0.8s ease-out 0.8s both;
+          }
+
+          .animate-blink {
+            animation: blink 1s step-end infinite;
           }
         `}</style>
       </section>

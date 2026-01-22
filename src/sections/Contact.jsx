@@ -1,10 +1,42 @@
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import { useParallaxElement } from '../hooks/useParallax'
+
 function Contact() {
+  const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
+  const [cardRef, cardVisible] = useScrollAnimation({ threshold: 0.3, once: true })
+  
+  // Parallax effect
+  const [parallaxRef, parallaxOffset] = useParallaxElement(0.1)
+
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-100 dark:bg-gray-800/50">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white">Get In Touch</h2>
+    <section id="contact" className="py-20 px-4 bg-gray-100 dark:bg-gray-800/50 relative overflow-hidden">
+      {/* Decorative parallax background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+        <div 
+          className="absolute top-10 left-20 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-3xl"
+          style={{ transform: `translateY(${parallaxOffset * 0.4}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-10 right-20 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl"
+          style={{ transform: `translateY(${parallaxOffset * 0.6}px)` }}
+        ></div>
+      </div>
+      
+      <div 
+        ref={parallaxRef}
+        className="max-w-4xl mx-auto relative z-10"
+      >
+        <h2 
+          ref={titleRef}
+          className={`text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white animate-on-scroll fade-up ${titleVisible ? 'visible' : ''}`}
+        >
+          Get In Touch
+        </h2>
         
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 text-center">
+        <div 
+          ref={cardRef}
+          className={`bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 text-center animate-on-scroll fade-in ${cardVisible ? 'visible' : ''}`}
+        >
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
             I'm currently looking for Software Engineer opportunities. 
             Whether you have a question or just want to say hi, feel free to reach out!
