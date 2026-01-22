@@ -26,7 +26,7 @@ function Projects() {
     {
       title: "Project Management Tool",
       description: "A web-based project management tool designed to help teams collaborate effectively. Features include task assignments, progress tracking, and real-time notifications.",
-      tech: ["Vue.js", "Firebase", "Tailwind CSS, MongoDB, Express", "Node.js, React"],
+      tech: ["Vue.js", "Firebase", "Tailwind CSS", "MongoDB", "Express", "Node.js", "React"],
       githubLink: "https://github.com/btran54/project-management-tool",
       highlights: ["Task assignments", "Progress tracking", "Real-time notifications", "User authentication"],
       image: projectManagerDemo
