@@ -99,7 +99,7 @@ function Hero() {
               <SiGithub className="text-2xl" />
             </a>
             <a 
-              href="mailto:briantran888@gmail.com@ucsc.edu"
+              href="mailto:briantran888@gmail.com"
               className="p-4 border border-gray-300 dark:border-gray-600 hover:border-red-400 hover:text-red-400 rounded-lg transition hover:scale-110 transform duration-200"
             >
               <HiMail className="text-2xl" />

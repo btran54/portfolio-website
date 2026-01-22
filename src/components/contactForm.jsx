@@ -261,7 +261,7 @@ function ContactForm() {
             <HiXCircle className="text-2xl text-red-600 dark:text-red-400 flex-shrink-0" />
             <div>
               <p className="font-medium text-red-800 dark:text-red-300">Failed to send message</p>
-              <p className="text-sm text-red-700 dark:text-red-400">Please try again or email me directly at btran54@ucsc.edu</p>
+              <p className="text-sm text-red-700 dark:text-red-400">Please try again or email me directly at briantran888@gmail.com</p>
             </div>
           </div>
         )}
