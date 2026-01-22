@@ -79,7 +79,7 @@ function Contact() {
               GitHub
             </a>
             <a 
-              href="https://linkedin.com/in/brian-tran-27"
+              href="https://www.linkedin.com/in/brian-tran-42bb18207/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium flex items-center justify-center gap-2"

@@ -83,7 +83,7 @@ function Hero() {
 
           <div className="flex gap-4 justify-center animate-fade-in-delay-4">
             <a 
-              href="https://linkedin.com/in/brian-tran-27"
+              href="https://www.linkedin.com/in/brian-tran-42bb18207/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 border border-gray-300 dark:border-gray-600 hover:border-blue-400 hover:text-blue-400 rounded-lg transition hover:scale-110 transform duration-200"
