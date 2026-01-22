@@ -84,7 +84,7 @@ function Skills() {
         </div>
 
         {/* Rotating Icon Carousel */}
-        <div className="flex justify-center">
+        <div className="flex justify-center overflow-hidden">
           <div className="relative w-[600px] h-[400px]">
             <style>{`
               @keyframes rotate {

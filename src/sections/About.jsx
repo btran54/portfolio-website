@@ -8,8 +8,8 @@ function About() {
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">About Me</h2>
         
-        <div className="grid md:grid-cols-[auto,1fr] gap-8 items-center">
-          {/* Images Column - Fixed width */}
+        <div className="grid md:grid-cols-[auto,1fr] gap-8 items-center justify-items-center md:justify-items-start">
+          {/* Images Column - Fixed width, centered on mobile */}
           <div className="space-y-4 w-80">
             <div className="grid grid-cols-2 gap-4">
               <img 
@@ -31,7 +31,7 @@ function About() {
           </div>
           
           {/* About Text - Takes remaining space */}
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 h-full flex items-center">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 h-full flex items-center w-full">
             <div className="space-y-4 text-gray-600 dark:text-gray-300">
               <p className="text-lg">
                 Hi! I'm Brian, a recent Computer Science graduate from UC Santa Cruz (June 2025) 
