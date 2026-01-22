@@ -8,6 +8,9 @@ import projectManagerDemo from '../assets/project-manager-demo.gif'
 
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [nextIndex, setNextIndex] = useState(null)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [slideDirection, setSlideDirection] = useState('') // 'next' or 'prev'
   const [titleRef, titleVisible] = useScrollAnimation({ threshold: 0.3, once: true })
   const [carouselRef, carouselVisible] = useScrollAnimation({ threshold: 0.2, once: true })
   
@@ -44,14 +47,107 @@ function Projects() {
   ]
 
   const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length)
+    if (isAnimating) return
+    const next = (currentIndex + 1) % projects.length
+    setNextIndex(next)
+    setIsAnimating(true)
+    setSlideDirection('next')
+    
+    setTimeout(() => {
+      setCurrentIndex(next)
+      setNextIndex(null)
+      setSlideDirection('')
+      setIsAnimating(false)
+    }, 700)
   }
 
   const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
+    if (isAnimating) return
+    const prev = (currentIndex - 1 + projects.length) % projects.length
+    setNextIndex(prev)
+    setIsAnimating(true)
+    setSlideDirection('prev')
+    
+    setTimeout(() => {
+      setCurrentIndex(prev)
+      setNextIndex(null)
+      setSlideDirection('')
+      setIsAnimating(false)
+    }, 700)
   }
 
-  const currentProject = projects[currentIndex]
+  const goToProject = (index) => {
+    if (!isAnimating && index !== currentIndex) {
+      setNextIndex(index)
+      setIsAnimating(true)
+      setSlideDirection(index > currentIndex ? 'next' : 'prev')
+      
+      setTimeout(() => {
+        setCurrentIndex(index)
+        setNextIndex(null)
+        setSlideDirection('')
+        setIsAnimating(false)
+      }, 700)
+    }
+  }
+
+  const renderProjectCard = (project) => (
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      {/* Project GIF */}
+      <img 
+        src={project.image} 
+        alt={`${project.title} demo`}
+        className="w-full object-contain bg-gray-200 dark:bg-gray-900"
+      />
+      
+      {/* Content */}
+      <div className="p-8">
+        <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{project.title}</h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">{project.description}</p>
+        
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-500 mb-3">Key Highlights:</h4>
+          <ul className="space-y-2">
+            {project.highlights.map((highlight, i) => (
+              <li key={i} className="text-gray-700 dark:text-gray-300">• {highlight}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.tech.map((tech, i) => (
+            <span 
+              key={i}
+              className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+        
+        <div className="flex gap-4">
+          {project.liveLink && (
+            <a 
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition font-medium"
+            >
+              Live Demo
+            </a>
+          )}
+          <a 
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <section id="projects" className="min-h-screen py-20 px-4 relative">
@@ -84,67 +180,38 @@ function Projects() {
           ref={carouselRef}
           className={`relative animate-on-scroll fade-in ${carouselVisible ? 'visible' : ''}`}
         >
-          {/* Project Card */}
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300">
-            {/* Project GIF */}
-            <img 
-              src={currentProject.image} 
-              alt={`${currentProject.title} demo`}
-              className="w-full object-contain bg-gray-200 dark:bg-gray-900"
-            />
-            
-            {/* Content */}
-            <div className="p-8">
-              <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{currentProject.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">{currentProject.description}</p>
-              
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-500 mb-3">Key Highlights:</h4>
-                <ul className="space-y-2">
-                  {currentProject.highlights.map((highlight, i) => (
-                    <li key={i} className="text-gray-700 dark:text-gray-300">• {highlight}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mb-6">
-                {currentProject.tech.map((tech, i) => (
-                  <span 
-                    key={i}
-                    className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              <div className="flex gap-4">
-                {currentProject.liveLink && (
-                  <a 
-                    href={currentProject.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition font-medium"
-                  >
-                    Live Demo
-                  </a>
-                )}
-                <a 
-                  href={currentProject.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium"
-                >
-                  GitHub
-                </a>
-              </div>
+          {/* Project Card Container with overflow hidden for slide effect */}
+          <div className="relative overflow-hidden rounded-lg">
+            {/* Current Project */}
+            <div 
+              className={`transition-all duration-700 ease-in-out ${
+                slideDirection === 'next' ? 'animate-slide-out-left' : 
+                slideDirection === 'prev' ? 'animate-slide-out-right' : ''
+              }`}
+            >
+              {renderProjectCard(projects[currentIndex])}
             </div>
+
+            {/* Next Project (only visible during animation) */}
+            {nextIndex !== null && (
+              <div 
+                className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                  slideDirection === 'next' ? 'animate-slide-in-right' : 
+                  slideDirection === 'prev' ? 'animate-slide-in-left' : ''
+                }`}
+              >
+                {renderProjectCard(projects[nextIndex])}
+              </div>
+            )}
           </div>
 
           {/* Navigation Buttons */}
           <button
             onClick={prevProject}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition border border-gray-200 dark:border-gray-700"
+            disabled={isAnimating}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition border border-gray-200 dark:border-gray-700 ${
+              isAnimating ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             aria-label="Previous project"
           >
             <HiChevronLeft className="text-2xl text-gray-700 dark:text-gray-300" />
@@ -152,7 +219,10 @@ function Projects() {
 
           <button
             onClick={nextProject}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition border border-gray-200 dark:border-gray-700"
+            disabled={isAnimating}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition border border-gray-200 dark:border-gray-700 ${
+              isAnimating ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             aria-label="Next project"
           >
             <HiChevronRight className="text-2xl text-gray-700 dark:text-gray-300" />
@@ -163,12 +233,13 @@ function Projects() {
             {projects.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => goToProject(index)}
+                disabled={isAnimating}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
                     ? 'bg-blue-500 w-8' 
                     : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                }`}
+                } ${isAnimating ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 aria-label={`Go to project ${index + 1}`}
               />
             ))}
@@ -180,6 +251,69 @@ function Projects() {
           </div>
         </div>
       </div>
+
+      {/* Slide Animation Styles */}
+      <style>{`
+        @keyframes slide-out-left {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+        }
+
+        @keyframes slide-out-right {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+
+        @keyframes slide-in-left {
+          from {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-in-right {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        .animate-slide-out-left {
+          animation: slide-out-left 0.7s ease-in-out forwards;
+        }
+
+        .animate-slide-out-right {
+          animation: slide-out-right 0.7s ease-in-out forwards;
+        }
+
+        .animate-slide-in-left {
+          animation: slide-in-left 0.7s ease-in-out forwards;
+        }
+
+        .animate-slide-in-right {
+          animation: slide-in-right 0.7s ease-in-out forwards;
+        }
+      `}</style>
     </section>
   )
 }

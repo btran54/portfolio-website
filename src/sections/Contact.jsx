@@ -63,7 +63,7 @@ function Contact() {
           {/* Social Links */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="mailto:btran54@ucsc.edu"
+              href="mailto:briantran888@gmail.com"
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition font-medium flex items-center justify-center gap-2"
             >
               <HiMail className="text-xl" />
