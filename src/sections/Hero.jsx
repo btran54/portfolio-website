@@ -17,6 +17,7 @@ function Hero() {
   const roles = [
     "Full-Stack Software Engineer",
     "React Developer",
+    "Based in San Jose, CA",
     "Please hire me :)",
     "Problem Solver",
     "Tech Enthusiast"
