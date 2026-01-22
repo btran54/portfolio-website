@@ -87,7 +87,7 @@ function About() {
               </p>
               
               <p className="text-lg">
-                Currently seeking <span className="text-blue-500 dark:text-blue-400 font-semibold">Software Engineer 1 / Junior SWE / Associate SWE</span> positions 
+                I am Currently seeking <span className="text-blue-500 dark:text-blue-400 font-semibold">Software Engineer 1 / Junior SWE / Associate SWE</span> positions 
                 where I can contribute to meaningful projects, learn from experienced teams, and continue 
                 growing as a developer.
               </p>
