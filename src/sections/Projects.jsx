@@ -124,21 +124,21 @@ function Projects() {
         )}
 
         {isMobile ? (
-          <img 
-            src={project.gif} 
+          <img
+            src={project.gif}
             alt={`${project.title} demo`}
-            className={`w-full object-contain transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
+            className={`w-full h-auto transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
             loading="lazy"
             onLoad={() => setIsMediaLoading(false)}
             onError={() => setIsMediaLoading(false)}
           />
         ) : (
-          <video 
-            autoPlay 
-            loop 
-            muted 
+          <video
+            autoPlay
+            loop
+            muted
             playsInline
-            className={`w-full object-contain transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
+            className={`w-full h-auto transition-opacity duration-300 ${isMediaLoading ? 'opacity-0' : 'opacity-100'}`}
             key={project.title}
             onLoadedData={() => setIsMediaLoading(false)}
             onError={() => setIsMediaLoading(false)}
@@ -363,10 +363,10 @@ function Projects() {
           animation: slide-in-right 0.7s ease-in-out forwards;
         }
 
-        /* Ensure minimum height for loading state */
+        /* Ensure aspect ratio for loading state */
         .relative.bg-gray-200,
         .relative.bg-gray-900 {
-          min-height: 400px;
+          min-height: 200px;
         }
       `}</style>
     </section>
